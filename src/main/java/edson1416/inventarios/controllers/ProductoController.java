@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class ProductoController extends BaseController{
 
@@ -18,8 +20,8 @@ public class ProductoController extends BaseController{
     private ProductoService productoService;
 
     @GetMapping("/productos")
-    public Page<Producto> allProductos(Pageable pageable) {
-        Page<Producto> productos = this.productoService.listar(pageable);
+    public List<Producto> allProductos() {
+        List<Producto> productos = this.productoService.listar();
         logger.info("productos encontrados:");
         productos.forEach(producto -> logger.info(producto.toString()));
         return productos;

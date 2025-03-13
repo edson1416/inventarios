@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductoService implements IProductoService {
 
@@ -15,8 +17,8 @@ public class ProductoService implements IProductoService {
     private ProductoRepositori productoRepositori;
 
     @Override
-    public Page<Producto> listar(Pageable pageable) {
-        return this.productoRepositori.findAll(pageable);
+    public List<Producto> listar() {
+        return this.productoRepositori.findAll();
     }
 
     @Override
