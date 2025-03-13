@@ -1,5 +1,7 @@
 package edson1416.inventarios.services;
 
+import edson1416.inventarios.dto.ProductoDTO;
+import edson1416.inventarios.mapper.ProductoMapper;
 import edson1416.inventarios.model.Producto;
 import edson1416.inventarios.repositories.ProductoRepositori;
 import edson1416.inventarios.services.interfaces.IProductoService;
@@ -16,9 +18,13 @@ public class ProductoService implements IProductoService {
     @Autowired
     private ProductoRepositori productoRepositori;
 
+    @Autowired
+    private ProductoMapper productoMapper;
+
     @Override
-    public List<Producto> listar() {
-        return this.productoRepositori.findAll();
+    public List<ProductoDTO> listar() {
+        List<Producto> productos = productoRepositori.findAll();
+        return this.productoMapper.toDTOList(productos);
     }
 
     @Override
@@ -27,8 +33,10 @@ public class ProductoService implements IProductoService {
     }
 
     @Override
-    public Producto guardar(Producto producto) {
-        return this.productoRepositori.save(producto);
+    public ProductoDTO guardar(ProductoDTO productoDTO) {
+        Producto producto = productoMapper.toProducto(productoDTO);
+        Producto productoEntity = this.productoRepositori.save(producto);
+        return this.productoMapper.toDto(productoEntity);
     }
 
     @Override

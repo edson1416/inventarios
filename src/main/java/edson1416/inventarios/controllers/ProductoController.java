@@ -1,5 +1,6 @@
 package edson1416.inventarios.controllers;
 
+import edson1416.inventarios.dto.ProductoDTO;
 import edson1416.inventarios.model.Producto;
 import edson1416.inventarios.services.ProductoService;
 import org.slf4j.Logger;
@@ -20,17 +21,17 @@ public class ProductoController extends BaseController{
     private ProductoService productoService;
 
     @GetMapping("/productos")
-    public List<Producto> allProductos() {
-        List<Producto> productos = this.productoService.listar();
+    public List<ProductoDTO> allProductos() {
+        List<ProductoDTO> productos = this.productoService.listar();
         logger.info("productos encontrados:");
         productos.forEach(producto -> logger.info(producto.toString()));
         return productos;
     }
 
     @PostMapping("/productos")
-    public Producto createProducto(@RequestBody Producto producto) {
-        logger.info("Creando un producto: " + producto);
-        return this.productoService.guardar(producto);
+    public ProductoDTO createProducto(@RequestBody ProductoDTO productoDTO) {
+        logger.info("Creando un producto: " + productoDTO);
+        return this.productoService.guardar(productoDTO);
     }
 
     @GetMapping("/productos/{id}")

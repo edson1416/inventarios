@@ -6,5 +6,5 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProveedorRepositori extends JpaRepository<Proveedor, Integer> {
-    Page<Proveedor> findAll(Pageable pageable);
+    //Page<Proveedor> findAll(Pageable pageable);
 }
